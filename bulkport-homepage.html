@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BulkPort Pro for Adobe Commerce</title>
+  <script src="./site-analytics-config.js"></script>
+  <script src="./site-analytics.js" defer></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffdf8;
+      --ink: #172126;
+      --muted: #5d676d;
+      --line: #d9d1c4;
+      --accent: #b45a22;
+      --accent-2: #184f63;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 16px/1.6 Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(180, 90, 34, 0.12), transparent 28rem),
+        radial-gradient(circle at bottom left, rgba(24, 79, 99, 0.10), transparent 24rem),
+        linear-gradient(180deg, #efe6d8 0%, var(--bg) 100%);
+    }
+    main {
+      max-width: 920px;
+      margin: 48px auto;
+      padding: 0 20px 48px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 18px 48px rgba(23, 33, 38, 0.08);
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--accent-2);
+    }
+    h1, h2 {
+      line-height: 1.15;
+      margin: 0 0 16px;
+    }
+    h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); }
+    h2 { font-size: 1.5rem; margin-top: 28px; }
+    p {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 24px 0 8px;
+    }
+    .button {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: #fff;
+      font-weight: 700;
+    }
+    .button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff7ef;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    footer {
+      margin-top: 28px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+  </style>
+<!-- Footer AdSense -->
+  <style data-footer-adsense-style>
+    .footer-adsense {
+      margin-top: 24px;
+      padding-top: 18px;
+      display: grid;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .footer-adsense__label {
+      margin: 0;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+
+    .footer-adsense__unit {
+      display: block;
+      width: 100%;
+      min-height: 90px;
+    }
+  </style>
+  <script src="./adsense-config.js"></script>
+  <script>
+    (function () {
+      const config = window.__FOOTER_ADSENSE__;
+      if (
+        !config ||
+        !config.client ||
+        !config.slot ||
+        document.querySelector("script[data-footer-adsense-loader]")
+      ) {
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.src =
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" +
+        encodeURIComponent(config.client);
+      script.crossOrigin = "anonymous";
+      script.dataset.footerAdsenseLoader = "true";
+      document.head.appendChild(script);
+    })();
+  </script>
+</head>
+<body>
+  <main>
+    <section class="card">
+      <p class="eyebrow">BulkPort</p>
+      <h1>Bulk import and export tools for Adobe Commerce.</h1>
+      <p>BulkPort builds admin-first data tools for merchants who need controlled, resumable import and export workflows instead of fragile one-shot uploads. The current sales motion covers both Adobe Commerce and OpenCart, with dedicated pages for each edition.</p>
+      <div class="actions">
+        <a class="button primary" href="./direct-sales.html">Adobe Commerce Edition</a>
+        <a class="button" href="./opencart-sales.html">OpenCart Edition</a>
+        <a class="button" href="https://commercemarketplace.adobe.com/bulkport-module-pro.html">Adobe Marketplace</a>
+        <a class="button" href="./pricing.html">Pricing</a>
+        <a class="button" href="./install-questionnaire.html">Adobe Questionnaire</a>
+        <a class="button" href="./opencart-install-questionnaire.html">OpenCart Questionnaire</a>
+        <a class="button" href="./onboarding.html">Customer Onboarding</a>
+        <a class="button" href="./support.html">Support</a>
+        <a class="button primary" href="./privacy-policy.html">Privacy Policy</a>
+      </div>
+
+      <h2>Current product scope</h2>
+      <ul>
+        <li>Adobe Commerce / Magento 2: CSV and XLSX import and export, queued workers, cron processing, chunked uploads, resumable imports, cleanup, and downloadable error reports.</li>
+        <li>OpenCart: job-based import and export workflows with worker processing, templates, saved profiles, downloadable outputs, and error reporting.</li>
+      </ul>
+
+      <h2>Contact</h2>
+      <p>Publisher profile and product listings are managed through the official Adobe Commerce Marketplace and OpenCart seller channels.</p>
+      <div class="actions">
+        <a class="button primary" href="./opencart-sales.html">OpenCart Edition</a>
+        <a class="button" href="./direct-sales.html">Adobe Commerce Edition</a>
+        <a class="button" href="./opencart-install-questionnaire.html">OpenCart Intake</a>
+      </div>
+
+      <footer>BulkPort<!-- Footer AdSense slot -->
+  <div class="footer-adsense" data-footer-adsense hidden>
+    <p class="footer-adsense__label">Advertisement</p>
+    <ins
+      class="adsbygoogle footer-adsense__unit"
+      style="display:block"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+  </div>
+  <script>
+    (function () {
+      const wrapper = document.currentScript.previousElementSibling;
+      const config = window.__FOOTER_ADSENSE__;
+      if (!wrapper || !config || !config.client || !config.slot) {
+        return;
+      }
+
+      const unit = wrapper.querySelector(".adsbygoogle");
+      if (!unit) {
+        return;
+      }
+
+      unit.setAttribute("data-ad-client", config.client);
+      unit.setAttribute("data-ad-slot", config.slot);
+      wrapper.hidden = false;
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (error) {
+        console.error("Footer AdSense failed to render", error);
+      }
+    })();
+  </script>
+</footer>
+    </section>
+  </main>
+</body>
+</html>

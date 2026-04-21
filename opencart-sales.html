@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BulkPort Pro for OpenCart</title>
+  <script src="./site-analytics-config.js"></script>
+  <script src="./site-analytics.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3efe6;
+      --panel: rgba(255, 253, 248, 0.94);
+      --panel-strong: #fffdf8;
+      --ink: #162126;
+      --muted: #5d676d;
+      --line: #d8cfbf;
+      --accent: #2f6b4f;
+      --accent-2: #8d5d20;
+      --shadow: 0 24px 64px rgba(22, 33, 38, 0.10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font: 16px/1.6 "Manrope", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(47, 107, 79, 0.14), transparent 26rem),
+        radial-gradient(circle at 18% 20%, rgba(141, 93, 32, 0.12), transparent 24rem),
+        linear-gradient(180deg, #efe7d9 0%, var(--bg) 100%);
+    }
+    a { color: inherit; }
+    main {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 24px 20px 56px;
+    }
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 0 24px;
+    }
+    .brand {
+      text-decoration: none;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .brand-mark {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .brand-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nav a,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 11px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      font-weight: 700;
+      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+    }
+    .nav a:hover,
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(22, 33, 38, 0.08);
+    }
+    .button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #f5fbf6;
+    }
+    .button.secondary {
+      background: rgba(47, 107, 79, 0.08);
+      border-color: rgba(47, 107, 79, 0.16);
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 0.94fr) minmax(360px, 1.06fr);
+      gap: 30px;
+      padding: clamp(28px, 4vw, 48px);
+      border: 1px solid rgba(216, 207, 191, 0.92);
+      border-radius: 34px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.84), rgba(255, 253, 248, 0.98)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0));
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      z-index: -1;
+      animation: drift 12s ease-in-out infinite;
+    }
+    .hero::before {
+      width: 24rem;
+      height: 24rem;
+      top: -9rem;
+      right: -7rem;
+      background: radial-gradient(circle, rgba(47, 107, 79, 0.18), rgba(47, 107, 79, 0));
+    }
+    .hero::after {
+      width: 18rem;
+      height: 18rem;
+      bottom: -8rem;
+      left: -4rem;
+      background: radial-gradient(circle, rgba(141, 93, 32, 0.16), rgba(141, 93, 32, 0));
+      animation-delay: -4s;
+    }
+    .hero-copy > * {
+      opacity: 0;
+      animation: rise-in 700ms ease forwards;
+    }
+    .hero-copy > :nth-child(1) { animation-delay: 80ms; }
+    .hero-copy > :nth-child(2) { animation-delay: 160ms; }
+    .hero-copy > :nth-child(3) { animation-delay: 240ms; }
+    .hero-copy > :nth-child(4) { animation-delay: 320ms; }
+    .eyebrow {
+      margin: 0 0 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    h1, h2, h3 {
+      line-height: 1.04;
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 700;
+    }
+    h1 {
+      max-width: 11.5ch;
+      font-size: clamp(2.4rem, 4.8vw, 4rem);
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+    h2 {
+      font-size: clamp(1.65rem, 3vw, 2.4rem);
+      letter-spacing: -0.03em;
+    }
+    h3 {
+      font-size: 1.2rem;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .lead {
+      margin-top: 18px;
+      max-width: 58ch;
+      font-size: 1.05rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+    .hero-aside {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+    .stack {
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(216, 207, 191, 0.92);
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: 0 10px 28px rgba(22, 33, 38, 0.05);
+    }
+    .stack p {
+      margin-top: 10px;
+    }
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+    .checklist li {
+      padding-left: 24px;
+      position: relative;
+      color: var(--ink);
+    }
+    .checklist li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(47, 107, 79, 0.12);
+      transform: translateY(-50%);
+    }
+    .section {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+      gap: 22px;
+      margin-top: 24px;
+      padding: 28px 0;
+      border-top: 1px solid rgba(216, 207, 191, 0.72);
+    }
+    .section:first-of-type {
+      border-top: 0;
+      margin-top: 20px;
+    }
+    .section .copy {
+      max-width: 64ch;
+    }
+    .meter {
+      padding: 22px;
+      border-radius: 24px;
+      background: var(--panel);
+      border: 1px solid rgba(216, 207, 191, 0.92);
+    }
+    .meter + .meter {
+      margin-top: 16px;
+    }
+    .price {
+      font-size: 2rem;
+      line-height: 1;
+      margin: 10px 0 12px;
+      color: var(--ink);
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .faq {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+    }
+    .faq div {
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: var(--panel);
+      border: 1px solid rgba(216, 207, 191, 0.92);
+    }
+    .faq dt {
+      margin: 0 0 8px;
+    }
+    .faq dd {
+      margin: 0;
+      color: var(--muted);
+    }
+    .cta-band {
+      margin-top: 24px;
+      padding: 26px;
+      border-radius: 28px;
+      border: 1px solid rgba(47, 107, 79, 0.18);
+      background: rgba(47, 107, 79, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .callout {
+      margin-top: 24px;
+      padding: 26px;
+      border-radius: 28px;
+      border: 1px solid rgba(47, 107, 79, 0.18);
+      background: rgba(47, 107, 79, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .proof-list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .proof-list li {
+      padding-left: 24px;
+      position: relative;
+      color: var(--ink);
+    }
+    .proof-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent-2);
+      box-shadow: 0 0 0 4px rgba(141, 93, 32, 0.10);
+      transform: translateY(-50%);
+    }
+    footer {
+      margin-top: 28px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes drift {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(0, 12px, 0) scale(1.02); }
+    }
+    @media (max-width: 900px) {
+      .site-header,
+      .section,
+      .callout,
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .site-header {
+        align-items: flex-start;
+      }
+      .hero {
+        gap: 22px;
+      }
+      .section {
+        gap: 16px;
+      }
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+<!-- Footer AdSense -->
+  <style data-footer-adsense-style>
+    .footer-adsense {
+      margin-top: 24px;
+      padding-top: 18px;
+      display: grid;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .footer-adsense__label {
+      margin: 0;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+
+    .footer-adsense__unit {
+      display: block;
+      width: 100%;
+      min-height: 90px;
+    }
+  </style>
+  <script src="./adsense-config.js"></script>
+  <script>
+    (function () {
+      const config = window.__FOOTER_ADSENSE__;
+      if (
+        !config ||
+        !config.client ||
+        !config.slot ||
+        document.querySelector("script[data-footer-adsense-loader]")
+      ) {
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.src =
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" +
+        encodeURIComponent(config.client);
+      script.crossOrigin = "anonymous";
+      script.dataset.footerAdsenseLoader = "true";
+      document.head.appendChild(script);
+    })();
+  </script>
+</head>
+<body>
+  <main>
+    <header class="site-header">
+      <a class="brand" href="./bulkport-homepage.html">
+        <p class="brand-mark">BulkPort Pro</p>
+        <p class="brand-copy">Bulk import/export for Adobe Commerce and OpenCart</p>
+      </a>
+      <nav class="nav">
+        <a href="./direct-sales.html">Adobe Commerce</a>
+        <a href="./opencart-sales.html">OpenCart</a>
+        <a href="./pricing.html">Pricing</a>
+        <a href="./opencart-install-questionnaire.html">OpenCart Questionnaire</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">OpenCart extension</p>
+        <h1>Bulk import and export for OpenCart without babysitting the browser.</h1>
+        <p class="lead">BulkPort Pro gives OpenCart stores a safer way to run large spreadsheet workflows with queued jobs, chunked uploads, resumable imports, background processing, and live status tracking.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="./opencart-install-questionnaire.html">Request OpenCart Install</a>
+          <a class="button secondary" href="./pricing.html">See Pricing</a>
+          <a class="button" href="#support">View Support</a>
+        </div>
+      </div>
+      <div class="hero-aside">
+        <div class="stack">
+          <h3>What it replaces</h3>
+          <ul class="checklist">
+            <li>Fragile one-shot CSV uploads</li>
+            <li>Invisible background failures</li>
+            <li>Manual retry and recovery work</li>
+          </ul>
+        </div>
+        <div class="stack">
+          <h3>Supported entities</h3>
+          <p>Products, categories, manufacturers, customers, and orders.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="copy">
+        <p class="eyebrow">Problem</p>
+        <h2>Most OpenCart import tools are fine until the file gets large.</h2>
+        <p>Small, browser-bound spreadsheet tools break down when jobs take too long, files get too large, or operators need visibility into what actually happened.</p>
+      </div>
+      <div>
+        <div class="meter">
+          <h3>For merchants</h3>
+          <p>Use a safer workflow for catalog updates, customer exports, and repeat admin tasks.</p>
+        </div>
+        <div class="meter">
+          <h3>For agencies</h3>
+          <p>Sell a cleaner operational story when client stores need recurring bulk work.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="copy">
+        <p class="eyebrow">Workflow</p>
+        <h2>Queue the job. Upload in chunks. Process in the background.</h2>
+        <p>BulkPort Pro turns bulk data changes into managed jobs instead of single fragile requests. You can queue imports and exports, monitor progress live, recover from interruptions, download outputs, and review error reports without losing track of where a job failed.</p>
+      </div>
+      <div>
+        <div class="meter">
+          <h3>Built for operations</h3>
+          <p>Chunked uploads, resumable checkpoints, and private storage keep the flow manageable.</p>
+        </div>
+        <div class="meter">
+          <h3>Built for repeat work</h3>
+          <p>Saved profiles and templates make the next run faster than the last one.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="copy">
+        <p class="eyebrow">Proof</p>
+        <h2>Validated on OpenCart 4.1.0.3.</h2>
+        <p>The OpenCart edition is already packaged, installed, and smoke-tested in clean-room and live local stacks.</p>
+      </div>
+      <div>
+        <div class="meter">
+          <h3>Supported today</h3>
+          <ul class="proof-list">
+            <li>products, categories, manufacturers, customers, and orders</li>
+            <li>xlsx, csv, xls, and json</li>
+            <li>chunked uploads and resumable imports</li>
+            <li>worker, cron, and heartbeat processing</li>
+          </ul>
+        </div>
+        <div class="meter">
+          <h3>Operational notes</h3>
+          <ul class="proof-list">
+            <li>private storage under OpenCart DIR_STORAGE</li>
+            <li>downloadable outputs and error reports</li>
+            <li>saved profiles for repeat workflows</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="copy">
+        <p class="eyebrow">Pricing</p>
+        <h2>Simple launch pricing.</h2>
+        <p>OpenCart is the secondary commercial channel, but it is fully supported and ready to sell now.</p>
+      </div>
+      <div class="two-col">
+        <div class="meter">
+          <h3>Single store</h3>
+          <p class="price">$89</p>
+          <p>One store license with 12 months of updates and support.</p>
+        </div>
+        <div class="meter">
+          <h3>Managed install</h3>
+          <p class="price">$149+</p>
+          <p>Optional install and configuration service for teams that want the first workflow running cleanly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">FAQ</p>
+          <h2>Common buyer questions.</h2>
+        </div>
+      </div>
+      <dl class="faq">
+        <div>
+          <dt><strong>Can it handle large files?</strong></dt>
+          <dd>Yes. The workflow is built around chunked uploads and queued processing rather than a single risky request.</dd>
+        </div>
+        <div>
+          <dt><strong>Is it useful for agencies?</strong></dt>
+          <dd>Yes. The clearest buyers are agencies and implementers who need repeatable migrations, catalog maintenance, or customer data work.</dd>
+        </div>
+        <div>
+          <dt><strong>What OpenCart versions are supported?</strong></dt>
+          <dd>The current target is OpenCart 4.1.x, with validation already completed on 4.1.0.3.</dd>
+        </div>
+        <div>
+          <dt><strong>What should I do next?</strong></dt>
+          <dd>Use the install questionnaire if you want help getting the first workflow running. Use the pricing page if you want to review the offer first.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="section" id="support">
+      <div class="cta-band">
+        <div>
+          <p class="eyebrow">Close</p>
+          <h2>If your store has outgrown basic spreadsheet tools, BulkPort Pro is the next step.</h2>
+          <p>That is the pitch: faster catalog operations, clearer progress, fewer broken imports, and a better story for agencies.</p>
+        </div>
+        <div class="hero-actions" style="margin-top:0">
+          <a class="button primary" href="./opencart-install-questionnaire.html">Request OpenCart Install</a>
+          <a class="button secondary" href="./pricing.html">View Pricing</a>
+          <a class="button secondary" href="./bulkport-homepage.html">Back to Home</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>BulkPort Pro OpenCart sales page<!-- Footer AdSense slot -->
+  <div class="footer-adsense" data-footer-adsense hidden>
+    <p class="footer-adsense__label">Advertisement</p>
+    <ins
+      class="adsbygoogle footer-adsense__unit"
+      style="display:block"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+  </div>
+  <script>
+    (function () {
+      const wrapper = document.currentScript.previousElementSibling;
+      const config = window.__FOOTER_ADSENSE__;
+      if (!wrapper || !config || !config.client || !config.slot) {
+        return;
+      }
+
+      const unit = wrapper.querySelector(".adsbygoogle");
+      if (!unit) {
+        return;
+      }
+
+      unit.setAttribute("data-ad-client", config.client);
+      unit.setAttribute("data-ad-slot", config.slot);
+      wrapper.hidden = false;
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (error) {
+        console.error("Footer AdSense failed to render", error);
+      }
+    })();
+  </script>
+</footer>
+  </main>
+</body>
+</html>

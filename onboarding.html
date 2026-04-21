@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BulkPort Adobe Commerce Onboarding</title>
+  <script src="./site-analytics-config.js"></script>
+  <script src="./site-analytics.js" defer></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffdf8;
+      --ink: #172126;
+      --muted: #5d676d;
+      --line: #d9d1c4;
+      --accent: #b45a22;
+      --accent-2: #184f63;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 16px/1.6 Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(180, 90, 34, 0.12), transparent 28rem),
+        radial-gradient(circle at bottom left, rgba(24, 79, 99, 0.10), transparent 24rem),
+        linear-gradient(180deg, #efe6d8 0%, var(--bg) 100%);
+    }
+    main {
+      max-width: 920px;
+      margin: 48px auto;
+      padding: 0 20px 48px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 18px 48px rgba(23, 33, 38, 0.08);
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--accent-2);
+    }
+    h1, h2 {
+      line-height: 1.15;
+      margin: 0 0 16px;
+    }
+    h1 { font-size: clamp(2.2rem, 4.6vw, 3.8rem); }
+    h2 { font-size: 1.45rem; margin-top: 28px; }
+    p, li { color: var(--muted); }
+    p { margin: 0 0 16px; }
+    ul, ol { margin: 0 0 18px; padding-left: 22px; }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 24px 0 12px;
+    }
+    .button {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: #fff;
+      font-weight: 700;
+    }
+    .button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff7ef;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      background: #fff;
+    }
+    footer {
+      margin-top: 28px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+  </style>
+<!-- Footer AdSense -->
+  <style data-footer-adsense-style>
+    .footer-adsense {
+      margin-top: 24px;
+      padding-top: 18px;
+      display: grid;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .footer-adsense__label {
+      margin: 0;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+
+    .footer-adsense__unit {
+      display: block;
+      width: 100%;
+      min-height: 90px;
+    }
+  </style>
+  <script src="./adsense-config.js"></script>
+  <script>
+    (function () {
+      const config = window.__FOOTER_ADSENSE__;
+      if (
+        !config ||
+        !config.client ||
+        !config.slot ||
+        document.querySelector("script[data-footer-adsense-loader]")
+      ) {
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.src =
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" +
+        encodeURIComponent(config.client);
+      script.crossOrigin = "anonymous";
+      script.dataset.footerAdsenseLoader = "true";
+      document.head.appendChild(script);
+    })();
+  </script>
+</head>
+<body>
+  <main>
+    <section class="card">
+      <p class="eyebrow">BulkPort</p>
+      <h1>Adobe Commerce customer onboarding</h1>
+      <p>BulkPort Pro is designed to get Adobe Commerce merchants from installation to a verified export and import workflow quickly, without relying on risky one-shot bulk changes.</p>
+      <div class="actions">
+        <a class="button primary" href="./direct-sales.html">Sales Page</a>
+        <a class="button" href="./bulkport-homepage.html">Home</a>
+        <a class="button" href="./support.html">Support</a>
+        <a class="button" href="./privacy-policy.html">Privacy Policy</a>
+      </div>
+
+      <h2>Supported platforms</h2>
+      <div class="grid">
+        <div class="panel">
+          <strong>OpenCart 4.1.x</strong>
+          <p>Products, categories, manufacturers, customers, and orders with job-based import and export workflows.</p>
+        </div>
+        <div class="panel">
+          <strong>Magento 2.4.8+</strong>
+          <p>Products, customers, customer addresses, advanced pricing, categories, and orders with CSV/XLSX import and export.</p>
+        </div>
+      </div>
+
+      <h2>Before installation</h2>
+      <ul>
+        <li>Confirm the exact platform and version.</li>
+        <li>Confirm admin access and whether managed installation is required.</li>
+        <li>Confirm that a current backup exists.</li>
+        <li>Confirm whether the store already uses custom import or export modules.</li>
+      </ul>
+
+      <h2>Recommended first test</h2>
+      <ol>
+        <li>Export <code>products</code>.</li>
+        <li>Make one small reversible change.</li>
+        <li>Import the edited file.</li>
+        <li>Re-export and confirm the change landed.</li>
+      </ol>
+
+      <h2>Large-file guidance</h2>
+      <ul>
+        <li>Test large imports on a copy or staging store first.</li>
+        <li>Use background worker or cron processing where available.</li>
+        <li>Keep the original export file for rollback and comparison.</li>
+        <li>Review the generated error report before retrying an import.</li>
+      </ul>
+
+      <footer>BulkPort customer onboarding<!-- Footer AdSense slot -->
+  <div class="footer-adsense" data-footer-adsense hidden>
+    <p class="footer-adsense__label">Advertisement</p>
+    <ins
+      class="adsbygoogle footer-adsense__unit"
+      style="display:block"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    ></ins>
+  </div>
+  <script>
+    (function () {
+      const wrapper = document.currentScript.previousElementSibling;
+      const config = window.__FOOTER_ADSENSE__;
+      if (!wrapper || !config || !config.client || !config.slot) {
+        return;
+      }
+
+      const unit = wrapper.querySelector(".adsbygoogle");
+      if (!unit) {
+        return;
+      }
+
+      unit.setAttribute("data-ad-client", config.client);
+      unit.setAttribute("data-ad-slot", config.slot);
+      wrapper.hidden = false;
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (error) {
+        console.error("Footer AdSense failed to render", error);
+      }
+    })();
+  </script>
+</footer>
+    </section>
+  </main>
+</body>
+</html>
